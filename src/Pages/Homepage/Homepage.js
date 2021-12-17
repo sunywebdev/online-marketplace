@@ -3,7 +3,6 @@ import Footer from "../Shared/Footer/Footer";
 import NavBar from "../Shared/NavBar/NavBar";
 import Banner from "./Components/Banner/Banner";
 import Banner2 from "./Components/Banner2/Banner2";
-import Categories from "./Components/Categories/Categories";
 import Gigs from "./Components/Gigs/Gigs";
 
 const Homepage = () => {
