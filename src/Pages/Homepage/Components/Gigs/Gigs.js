@@ -69,7 +69,7 @@ const Gigs = () => {
 										subheaderTypographyProps={{
 											variant: "body2",
 										}}
-										title='suny1234'
+										title={gig?.postedBy}
 										subheader='New Seller'
 									/>
 									<CardContent sx={{ py: 1, px: 1.5 }}>

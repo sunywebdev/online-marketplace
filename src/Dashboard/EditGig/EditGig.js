@@ -356,10 +356,11 @@ const EditGig = () => {
 								<Divider />
 								<CardActions
 									sx={{
+										mx: 1,
 										display: "flex",
 										flexDirection: "row",
 										alignItems: "center",
-										justifyContent: "space-around",
+										justifyContent: "space-between",
 									}}>
 									<Box>
 										<FormatAlignJustifyIcon
