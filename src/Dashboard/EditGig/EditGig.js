@@ -223,7 +223,7 @@ const EditGig = () => {
 			gigPhoto4: imageLink4 || gigPhoto4,
 		};
 		axios
-			.post(`https://${process.env.REACT_APP_SERVER_API}/gigs`, gig)
+			.put(`https://${process.env.REACT_APP_SERVER_API}/gigs`, gig)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",

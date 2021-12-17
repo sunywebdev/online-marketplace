@@ -32,7 +32,6 @@ const Profile = () => {
 	const [inputImage1, setInputImage1] = useState(null);
 	const [imageLink1, setImageLink1] = useState(null);
 	const [uploading1, setUploading1] = useState(false);
-	console.log(user);
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: {
 			address: "",

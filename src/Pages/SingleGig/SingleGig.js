@@ -250,7 +250,16 @@ const SingleGig = () => {
 							</Button>
 						) : (
 							<Link to='/dashboard' style={{ textDecoration: "none" }}>
-								<Button variant='contained' sx={{ mt: 1, width: "100%" }}>
+								<Button
+									variant='contained'
+									sx={{
+										mt: 1,
+										width: "100%",
+										backgroundColor: "#31887D",
+										"&.MuiButtonBase-root:hover": {
+											bgcolor: "#31887D",
+										},
+									}}>
 									Complete Profile Before Continue Order
 								</Button>
 							</Link>
