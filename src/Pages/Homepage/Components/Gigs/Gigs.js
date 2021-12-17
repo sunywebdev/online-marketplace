@@ -46,7 +46,12 @@ const Gigs = () => {
 					<>
 						{gigs?.map((gig) => (
 							<Grid item lg={3} md={4} sm={4} xs={12}>
-								<Card sx={{ textAlign: "left", border: "1px solid #e4e5e7" }}>
+								<Card
+									sx={{
+										textAlign: "left",
+										border: "1px solid #e4e5e7",
+										height: "100%",
+									}}>
 									<img
 										style={{ width: "100%", minHeight: "155px" }}
 										component='img'
@@ -77,7 +82,7 @@ const Gigs = () => {
 											to={`/gigs/${gig?._id}`}
 											style={{ textDecoration: "none", color: "black" }}>
 											<Typography gutterBottom variant='body' component='div'>
-												{gig?.gigTitle}
+												{gig?.gigTitle.slice(0,60)}
 											</Typography>
 										</Link>
 										<Box
