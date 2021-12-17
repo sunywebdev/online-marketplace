@@ -307,7 +307,7 @@ const EditGig = () => {
 										variant: "body2",
 										fontWeight: "bold",
 									}}
-									title='suny1234'
+									title={data?.postedBy}
 									subheader='New Seller'
 								/>
 								<CardContent sx={{ py: 1, px: 1.5 }}>
