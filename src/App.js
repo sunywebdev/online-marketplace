@@ -4,6 +4,7 @@ import AuthProvider from "./context/AuthProvider";
 import AddGig from "./Dashboard/AddGig/AddGig";
 import AllGigs from "./Dashboard/AllGigs/AllGigs";
 import AllOrders from "./Dashboard/AllOrders/AllOrders";
+import AllUsers from "./Dashboard/AllUsers/AllUsers";
 import ClientOrders from "./Dashboard/ClientOrders/ClientOrders";
 import DashboardHome from "./Dashboard/DashboardHome";
 import EditGig from "./Dashboard/EditGig/EditGig";
@@ -33,6 +34,7 @@ function App() {
 								</PrivateRoute>
 							}
 						/>
+
 						<Route path='/login' element={<SignIn />} />
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/resetpass' element={<ResetPass />} />
@@ -51,6 +53,7 @@ function App() {
 							<Route path='/dashboard/mygigs' element={<MyGigs />} />
 							<Route path='/dashboard/orders' element={<AllOrders />} />
 							<Route path='/dashboard/pagerols' element={<PageRols />} />
+							<Route path='/dashboard/allusers' element={<AllUsers />} />
 							<Route
 								path='/dashboard/clientorders'
 								element={<ClientOrders />}

@@ -143,8 +143,6 @@ const AllGigs = () => {
 								<TableCell align='left'>N/A</TableCell>
 								<TableCell align='left'>N/A</TableCell>
 								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
 							</TableRow>
 						)}
 					</TableBody>

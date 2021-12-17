@@ -23,7 +23,6 @@ export default function NavBar() {
 		setAnchorEl(null);
 	};
 	const { user, logOut } = useAuth();
-	console.log(user);
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static' sx={{ backgroundColor: "#31887D" }}>

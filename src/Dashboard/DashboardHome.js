@@ -21,6 +21,7 @@ import useAuth from "../context/useAuth";
 import { CardMedia } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import HomeIcon from "@mui/icons-material/Home";
 
 const drawerWidth = 222;
 
@@ -126,6 +127,22 @@ function DashboardHome(props) {
 								fontSize: "15px",
 								color: "#31887D",
 							}}
+							to='allusers'>
+							<ListItem button>
+								<ListItemIcon
+									sx={{ justifyContent: "center", color: "#31887D" }}>
+									<AdminPanelSettingsIcon />
+								</ListItemIcon>
+								<ListItemText primary={"All Users"} />
+							</ListItem>
+						</Link>
+						<Link
+							style={{
+								textDecoration: "none",
+								fontWeight: "bold",
+								fontSize: "15px",
+								color: "#31887D",
+							}}
 							to='pagerols'>
 							<ListItem button>
 								<ListItemIcon
@@ -199,7 +216,21 @@ function DashboardHome(props) {
 						<ListItemText primary={"My Orders"} />
 					</ListItem>
 				</Link>
-
+				<Link
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+						color: "#31887D",
+					}}
+					to='/'>
+					<ListItem button>
+						<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
+							<HomeIcon />
+						</ListItemIcon>
+						<ListItemText primary={"Home"} />
+					</ListItem>
+				</Link>
 				<ListItem button onClick={logOut} sx={{ color: "#31887D" }}>
 					<ListItemIcon sx={{ justifyContent: "center", color: "#31887D" }}>
 						<Logout />
@@ -233,7 +264,7 @@ function DashboardHome(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant='h6' noWrap component='div'>
-						ADMIN DASHBOARD
+						DASHBOARD
 					</Typography>
 				</Toolbar>
 			</AppBar>
