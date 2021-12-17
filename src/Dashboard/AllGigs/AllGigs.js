@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -17,7 +17,7 @@ import { Box } from "@mui/system";
 const AllGigs = () => {
 	const [gigs, setGigs] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:5000/gigs`)
+		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs`)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
 	}, []);
@@ -33,7 +33,7 @@ const AllGigs = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:5000/gigs/${id}`)
+					.delete(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "That Gig has been deleted.", "success");
 					})
@@ -46,6 +46,13 @@ const AllGigs = () => {
 	let serial = 1;
 	return (
 		<div>
+			<Typography
+				variant='h4'
+				gutterBottom
+				component='div'
+				sx={{ fontWeight: "bold", color: "#31887D" }}>
+				All Gigs
+			</Typography>
 			<TableContainer
 				component={Paper}
 				sx={{
@@ -89,35 +96,41 @@ const AllGigs = () => {
 												<Box>{gig?.postedBy}</Box>
 											</Box>
 										</TableCell>
-										<TableCell align='left' sx={{ display: "flex" }}>
-											<Link
-												to={`/dashboard/editgig/${gig?._id}`}
-												style={{ textDecoration: "none" }}>
-												<Button
-													color='primary'
-													variant='contained'
-													sx={{
-														mx: 0.5,
-														backgroundColor: "#31887D",
-														"&.MuiButtonBase-root:hover": {
-															bgcolor: "#31887D",
-														},
-													}}>
-													<EditIcon />
-												</Button>
-											</Link>
-											<Button
-												sx={{
-													backgroundColor: "#31887D",
-													"&.MuiButtonBase-root:hover": {
-														bgcolor: "#31887D",
-													},
-												}}
-												onClick={() => handleDelete(gig?._id)}
-												color='primary'
-												variant='contained'>
-												<DeleteIcon />
-											</Button>
+										<TableCell align='left'>
+											<Box sx={{ display: "flex" }}>
+												<Box>
+													<Link
+														to={`/dashboard/editgig/${gig?._id}`}
+														style={{ textDecoration: "none" }}>
+														<Button
+															color='primary'
+															variant='contained'
+															sx={{
+																mx: 0.5,
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															<EditIcon />
+														</Button>
+													</Link>
+												</Box>
+												<Box>
+													<Button
+														sx={{
+															backgroundColor: "#31887D",
+															"&.MuiButtonBase-root:hover": {
+																bgcolor: "#31887D",
+															},
+														}}
+														onClick={() => handleDelete(gig?._id)}
+														color='primary'
+														variant='contained'>
+														<DeleteIcon />
+													</Button>
+												</Box>
+											</Box>
 										</TableCell>
 									</TableRow>
 								))}

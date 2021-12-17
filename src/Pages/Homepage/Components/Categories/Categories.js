@@ -6,7 +6,6 @@ import {
 	List,
 	ListItemButton,
 	ListItemText,
-	Typography,
 } from "@mui/material";
 
 const Categories = () => {

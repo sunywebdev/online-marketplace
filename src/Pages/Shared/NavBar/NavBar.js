@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import useAuth from "../../../context/useAuth";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function NavBar() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,13 +70,13 @@ export default function NavBar() {
 								transformOrigin={{ horizontal: "right", vertical: "top" }}
 								anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
 								<Link to='/dashboard' style={{ textDecoration: "none" }}>
-									<MenuItem>
-										<Avatar /> Dashboard
+									<MenuItem sx={{ color: "#31887D" }}>
+										<DashboardIcon sx={{ color: "#31887D", mr: 1 }} /> Dashboard
 									</MenuItem>
 								</Link>
-								<MenuItem onClick={logOut}>
+								<MenuItem onClick={logOut} sx={{ color: "#31887D" }}>
 									<ListItemIcon>
-										<Logout fontSize='small' />
+										<Logout sx={{ color: "#31887D" }} />
 									</ListItemIcon>
 									Logout
 								</MenuItem>

@@ -18,17 +18,14 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../context/useAuth";
 
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const EditGig = () => {
 	const { id } = useParams();
-	console.log(id);
-	const [submitting, setSubmitting] = useState(false);
 	const [inputImage1, setInputImage1] = useState(null);
 	const [inputImage2, setInputImage2] = useState(null);
 	const [inputImage3, setInputImage3] = useState(null);
@@ -52,7 +49,7 @@ const EditGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload1,
 			)
 			.then((response) => {
@@ -87,7 +84,7 @@ const EditGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload2,
 			)
 			.then((response) => {
@@ -122,7 +119,7 @@ const EditGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload3,
 			)
 			.then((response) => {
@@ -157,7 +154,7 @@ const EditGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload4,
 			)
 			.then((response) => {
@@ -196,13 +193,14 @@ const EditGig = () => {
 	});
 	const [data, setData] = useState();
 	useEffect(() => {
-		axios.get(`http://localhost:5000/gigs/${id}`).then((res) => {
-			console.log(res.data);
-			reset(res.data);
-			setData(res.data);
-		});
+		axios
+			.get(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
+			.then((res) => {
+				reset(res.data);
+				setData(res.data);
+			});
 	}, [id, reset]);
-	const onSubmit = (
+	const onSubmit = ({
 		postedBy,
 		gigTitle,
 		gigPrice,
@@ -212,8 +210,7 @@ const EditGig = () => {
 		gigPhoto2,
 		gigPhoto3,
 		gigPhoto4,
-	) => {
-		console.log(data);
+	}) => {
 		const gig = {
 			postedBy,
 			gigTitle,
@@ -226,15 +223,14 @@ const EditGig = () => {
 			gigPhoto4: imageLink4 || gigPhoto4,
 		};
 		axios
-			.post(`http://localhost:5000/gigs`, gig)
+			.post(`https://${process.env.REACT_APP_SERVER_API}/gigs`, gig)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
-					title: "Your Gig Successfully Added",
+					title: "Your Gig Successfully Updated",
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				/* reset(); */
 			})
 			.catch(function (error) {
 				console.log("error", error);

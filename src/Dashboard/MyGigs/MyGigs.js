@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
-import { Avatar, Button, Container as div } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -19,17 +19,20 @@ const MyGigs = () => {
 	const { user } = useAuth();
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
-		fetch(`http://localhost:5000/singleUsers?email=${user?.email}`)
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setSingleUser(data);
-				console.log(data);
 			});
 	}, [user?.email]);
 
 	const [gigs, setGigs] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:5000/sellergigs?postedBy=${singleUser?.userName}`)
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/sellergigs?postedBy=${singleUser?.userName}`,
+		)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
 	}, [singleUser?.userName]);
@@ -45,7 +48,7 @@ const MyGigs = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`http://localhost:5000/gigs/${id}`)
+					.delete(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "That Gig has been deleted.", "success");
 					})
@@ -58,6 +61,13 @@ const MyGigs = () => {
 	let serial = 1;
 	return (
 		<div>
+			<Typography
+				variant='h4'
+				gutterBottom
+				component='div'
+				sx={{ fontWeight: "bold", color: "#31887D" }}>
+				My Gigs
+			</Typography>
 			<TableContainer
 				component={Paper}
 				sx={{
@@ -99,35 +109,41 @@ const MyGigs = () => {
 										<TableCell align='left'>{gig?.gigTitle}</TableCell>
 										<TableCell align='left'>{gig?.gigPrice} $</TableCell>
 
-										<TableCell align='left' sx={{ display: "flex" }}>
-											<Link
-												to={`/dashboard/editgig/${gig?._id}`}
-												style={{ textDecoration: "none" }}>
-												<Button
-													color='primary'
-													variant='contained'
-													sx={{
-														mx: 0.5,
-														backgroundColor: "#31887D",
-														"&.MuiButtonBase-root:hover": {
-															bgcolor: "#31887D",
-														},
-													}}>
-													<EditIcon />
-												</Button>
-											</Link>
-											<Button
-												onClick={() => handleDelete(gig?._id)}
-												color='primary'
-												variant='contained'
-												sx={{
-													backgroundColor: "#31887D",
-													"&.MuiButtonBase-root:hover": {
-														bgcolor: "#31887D",
-													},
-												}}>
-												<DeleteIcon />
-											</Button>
+										<TableCell align='left'>
+											<Box sx={{ display: "flex" }}>
+												<Box>
+													<Link
+														to={`/dashboard/editgig/${gig?._id}`}
+														style={{ textDecoration: "none" }}>
+														<Button
+															color='primary'
+															variant='contained'
+															sx={{
+																mx: 0.5,
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															<EditIcon />
+														</Button>
+													</Link>
+												</Box>
+												<Box>
+													<Button
+														sx={{
+															backgroundColor: "#31887D",
+															"&.MuiButtonBase-root:hover": {
+																bgcolor: "#31887D",
+															},
+														}}
+														onClick={() => handleDelete(gig?._id)}
+														color='primary'
+														variant='contained'>
+														<DeleteIcon />
+													</Button>
+												</Box>
+											</Box>
 										</TableCell>
 									</TableRow>
 								))}

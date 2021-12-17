@@ -1,25 +1,15 @@
 import {
 	Button,
 	Card,
-	CardContent,
 	CardMedia,
 	CircularProgress,
 	Container,
-	FormControl,
 	Grid,
 	IconButton,
-	Input,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	MenuItem,
-	Select,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableRow,
 	TextField,
 	Typography,
 } from "@mui/material";
@@ -63,22 +53,28 @@ const Profile = () => {
 			photoURL: imageLink1,
 		};
 		axios
-			.put("http://localhost:5000/users/updateUsers", userProfile)
-			.then(function (response) {})
+			.put(
+				`https://${process.env.REACT_APP_SERVER_API}/users/updateUsers`,
+				userProfile,
+			)
+			.then(function (response) {
+				Swal.fire("Success!", "Profile Updated Successfully.", "success");
+			})
 			.catch(function (error) {
 				console.log(error);
 			});
 	};
 	const [singleUser, setSingleUser] = useState();
 	useEffect(() => {
-		fetch(`http://localhost:5000/singleUsers?email=${user?.email}`)
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				reset(data);
 				setSingleUser(data);
-				console.log(data);
 			});
-	}, [reset, user?.email]);
+	}, [reset, user?.email, user?.photoURL]);
 
 	const uploadImage1 = (e) => {
 		e.preventDefault();
@@ -91,7 +87,7 @@ const Profile = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload1,
 			)
 			.then((response) => {
@@ -118,7 +114,7 @@ const Profile = () => {
 	return (
 		<Container>
 			<Grid justifyContent='center' container spacing={3}>
-				<Grid item xs={12} md={4}>
+				<Grid item xs={12} sm={12} md={4}>
 					<Card
 						sx={{
 							maxWidth: 345,
@@ -184,33 +180,45 @@ const Profile = () => {
 						<Typography
 							variant='h5'
 							component='div'
-							sx={{ fontWeight: "bold", mt: 2 }}>
+							sx={{ fontWeight: "bold", mt: 2, color: "#31887D" }}>
 							{singleUser?.displayName}
 						</Typography>
 						<List>
 							<ListItem sx={{ pt: 0 }}>
 								<ListItemIcon>
-									<AccountCircleIcon />
+									<AccountCircleIcon sx={{ color: "#31887D" }} />
 								</ListItemIcon>
-								<ListItemText primary={singleUser?.userName || "N/A"} />
+								<ListItemText
+									sx={{ color: "#31887D" }}
+									primary={singleUser?.userName || "N/A"}
+								/>
 							</ListItem>
 							<ListItem sx={{ pt: 0 }}>
 								<ListItemIcon>
-									<EmailIcon />
+									<EmailIcon sx={{ color: "#31887D" }} />
 								</ListItemIcon>
-								<ListItemText primary={singleUser?.email || "N/A"} />
+								<ListItemText
+									sx={{ color: "#31887D" }}
+									primary={singleUser?.email || "N/A"}
+								/>
 							</ListItem>
 							<ListItem sx={{ pt: 0 }}>
 								<ListItemIcon>
-									<CallIcon />
+									<CallIcon sx={{ color: "#31887D" }} />
 								</ListItemIcon>
-								<ListItemText primary={singleUser?.contact || "N/A"} />
+								<ListItemText
+									sx={{ color: "#31887D" }}
+									primary={singleUser?.contact || "N/A"}
+								/>
 							</ListItem>
 							<ListItem sx={{ pt: 0 }}>
 								<ListItemIcon>
-									<AddLocationIcon />
+									<AddLocationIcon sx={{ color: "#31887D" }} />
 								</ListItemIcon>
-								<ListItemText primary={singleUser?.address || "N/A"} />
+								<ListItemText
+									sx={{ color: "#31887D" }}
+									primary={singleUser?.address || "N/A"}
+								/>
 							</ListItem>
 						</List>
 					</Card>
@@ -338,7 +346,7 @@ const Profile = () => {
 										component='span'>
 										<AttachFileIcon
 											fontSize='large'
-											sx={{ fontWeight: "bold" }}
+											sx={{ fontWeight: "bold", color: "#31887D" }}
 										/>
 									</IconButton>
 								</label>
@@ -367,7 +375,7 @@ const Profile = () => {
 								</Box>
 								<ArrowForwardIcon
 									fontSize='large'
-									sx={{ fontWeight: "bold" }}
+									sx={{ fontWeight: "bold", color: "#31887D" }}
 								/>
 								{inputImage1 && (
 									<Button

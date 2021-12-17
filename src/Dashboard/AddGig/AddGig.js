@@ -16,7 +16,6 @@ import Swal from "sweetalert2";
 import useAuth from "../../context/useAuth";
 
 const AddGig = () => {
-	const [submitting, setSubmitting] = useState(false);
 	const [inputImage1, setInputImage1] = useState(null);
 	const [inputImage2, setInputImage2] = useState(null);
 	const [inputImage3, setInputImage3] = useState(null);
@@ -40,7 +39,7 @@ const AddGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload1,
 			)
 			.then((response) => {
@@ -75,7 +74,7 @@ const AddGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload2,
 			)
 			.then((response) => {
@@ -110,7 +109,7 @@ const AddGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload3,
 			)
 			.then((response) => {
@@ -145,7 +144,7 @@ const AddGig = () => {
 
 		axios
 			.post(
-				`https://api.imgbb.com/1/upload?&key=d1bdc6a614c853bd3d6d11f0b98f43c4`,
+				`https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_IMGBB_API}`,
 				payload4,
 			)
 			.then((response) => {
@@ -172,16 +171,16 @@ const AddGig = () => {
 	const { user } = useAuth();
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
-		fetch(`http://localhost:5000/singleUsers?email=${user?.email}`)
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setSingleUser(data);
-				console.log(data);
 			});
 	}, [user?.email]);
 	const { register, handleSubmit, reset } = useForm();
 	const onSubmit = (data) => {
-		console.log(data);
 		const gig = {
 			postedBy: singleUser?.userName,
 			sellerPhoto: singleUser?.photoURL,
@@ -195,7 +194,7 @@ const AddGig = () => {
 			gigPhoto4: imageLink4,
 		};
 		axios
-			.post(`http://localhost:5000/gigs`, gig)
+			.post(`https://${process.env.REACT_APP_SERVER_API}/gigs`, gig)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
@@ -203,7 +202,7 @@ const AddGig = () => {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				/* reset(); */
+				reset();
 			})
 			.catch(function (error) {
 				console.log("error", error);
@@ -223,7 +222,7 @@ const AddGig = () => {
 						variant='h4'
 						gutterBottom
 						component='div'
-						sx={{ fontWeight: "bold" }}>
+						sx={{ fontWeight: "bold", color: "#31887D" }}>
 						Add New Gig
 					</Typography>
 					<form onSubmit={handleSubmit(onSubmit)}>
@@ -457,7 +456,16 @@ const AddGig = () => {
 									</Button>
 								) : (
 									<Link to='/dashboard' style={{ textDecoration: "none" }}>
-										<Button variant='contained' sx={{ mt: 1, width: "100%" }}>
+										<Button
+											variant='contained'
+											sx={{
+												mt: 1,
+												width: "100%",
+												backgroundColor: "#31887D",
+												"&.MuiButtonBase-root:hover": {
+													bgcolor: "#31887D",
+												},
+											}}>
 											Complete Profile Before Adding New Gig
 										</Button>
 									</Link>

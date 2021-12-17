@@ -6,43 +6,25 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, Typography } from "@mui/material";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AllOrders = () => {
 	const [orders, setOrders] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:5000/orders`)
+		fetch(`https://${process.env.REACT_APP_SERVER_API}/orders`)
 			.then((res) => res.json())
 			.then((data) => setOrders(data));
 	}, [orders]);
 
-	const Accept = (e) => {
-		console.log(e);
-		const data = { orderStatus: "OnGoing", orderId: e };
-		axios
-			.put("http://localhost:5000/orders", data)
-			.then(function (response) {})
-			.catch(function (error) {
-				console.log(error);
-			});
-	};
 	const Cancel = (e) => {
-		console.log(e);
 		const data = { orderStatus: "Cancelled by Admin", orderId: e };
 		axios
-			.put("http://localhost:5000/orders", data)
-			.then(function (response) {})
-			.catch(function (error) {
-				console.log(error);
-			});
-	};
-	const Delivered = (e) => {
-		console.log(e);
-		const data = { orderStatus: "Delivered", orderId: e };
-		axios
-			.put("http://localhost:5000/orders", data)
-			.then(function (response) {})
+			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.then(function (response) {
+				Swal.fire("Success!", "This Order Cancelled Successfully.", "success");
+			})
 			.catch(function (error) {
 				console.log(error);
 			});
@@ -50,6 +32,13 @@ const AllOrders = () => {
 	let serial = 1;
 	return (
 		<div>
+			<Typography
+				variant='h4'
+				gutterBottom
+				component='div'
+				sx={{ fontWeight: "bold", color: "#31887D" }}>
+				All Orders
+			</Typography>
 			<TableContainer
 				component={Paper}
 				sx={{
@@ -120,6 +109,7 @@ const AllOrders = () => {
 						) : (
 							<TableRow
 								sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+								<TableCell align='left'>N/A</TableCell>
 								<TableCell align='left'>N/A</TableCell>
 								<TableCell align='left'>N/A</TableCell>
 								<TableCell align='left'>N/A</TableCell>

@@ -12,23 +12,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../context/useAuth";
 
-export default function Login() {
-	const { signInUsingGoogle, signInWithEmailPassword, auth, error } = useAuth();
+export default function ResetPass() {
+	const { auth, error, resetPassword } = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
 	console.log(error);
-	const handleGoogleLogin = () => {
-		signInUsingGoogle(navigate, location);
-	};
 	const { register, handleSubmit } = useForm();
 	const onSubmit = (data) => {
-		signInWithEmailPassword(
-			auth,
-			data.email,
-			data.password,
-			navigate,
-			location,
-		);
+		resetPassword(auth, data?.email, navigate, location);
 	};
 	return (
 		<Container component='main' maxWidth='xs'>
@@ -44,7 +35,7 @@ export default function Login() {
 					<LockOutlinedIcon />
 				</Avatar>
 				<Typography component='h1' variant='h5'>
-					Sign in
+					Reset Password
 				</Typography>
 				<form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: 3 }}>
 					<TextField
@@ -54,27 +45,11 @@ export default function Login() {
 						id='email'
 						label='Email Address'
 						name='email'
+						type='email'
 						autoComplete='email'
 						autoFocus
 						{...register("email", { required: true })}
 					/>
-					<TextField
-						margin='normal'
-						required
-						fullWidth
-						name='password'
-						label='Password'
-						type='password'
-						id='password'
-						autoComplete='current-password'
-						{...register("password", { required: true })}
-					/>
-
-					<Grid item xs>
-						<Link to='/resetpass' variant='body2'>
-							{"Forgot password?"}
-						</Link>
-					</Grid>
 					<Button
 						type='submit'
 						fullWidth
@@ -87,21 +62,7 @@ export default function Login() {
 								bgcolor: "#31887D",
 							},
 						}}>
-						Sign In
-					</Button>
-					<Button
-						onClick={handleGoogleLogin}
-						type='submit'
-						fullWidth
-						variant='contained'
-						sx={{
-							mb: 2,
-							backgroundColor: "#31887D",
-							"&.MuiButtonBase-root:hover": {
-								bgcolor: "#31887D",
-							},
-						}}>
-						Sign In With Google
+						Reset Password
 					</Button>
 					<Grid container justifyContent='center'>
 						<Grid item>

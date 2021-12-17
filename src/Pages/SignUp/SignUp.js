@@ -18,21 +18,11 @@ export default function SignUp() {
 	const { register, handleSubmit } = useForm();
 	const location = useLocation();
 	const navigate = useNavigate();
-	const errorMsg =
-		error === "Firebase: Error (auth/email-already-in-use)."
-			? "You already have an account"
-			: "";
-	const errorMsg2 =
-		error ===
-		"Firebase: Password should be at least 6 characters (auth/weak-password)."
-			? "Password must be 6 charactre"
-			: "";
 	const handleGoogleSignUp = () => {
 		signInUsingGoogle(navigate, location);
 	};
 
 	const onSubmit = (data) => {
-		console.log(data);
 		createNewUserUsingEmailPassword(
 			auth,
 			data.email,
@@ -100,7 +90,14 @@ export default function SignUp() {
 						type='submit'
 						fullWidth
 						variant='contained'
-						sx={{ mt: 3, mb: 2 }}>
+						sx={{
+							mt: 3,
+							mb: 2,
+							backgroundColor: "#31887D",
+							"&.MuiButtonBase-root:hover": {
+								bgcolor: "#31887D",
+							},
+						}}>
 						Sign Up
 					</Button>
 					<Button
@@ -108,7 +105,14 @@ export default function SignUp() {
 						type='submit'
 						fullWidth
 						variant='contained'
-						sx={{ mt: 3, mb: 2 }}>
+						sx={{
+							mt: 3,
+							mb: 2,
+							backgroundColor: "#31887D",
+							"&.MuiButtonBase-root:hover": {
+								bgcolor: "#31887D",
+							},
+						}}>
 						Sign Up With Google
 					</Button>
 					<Grid container justifyContent='center'>

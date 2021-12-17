@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import initializeAuth from "./firebase.init";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 initializeAuth();
 
@@ -25,15 +26,15 @@ const useFirebase = () => {
 	const auth = getAuth();
 	const googleProvider = new GoogleAuthProvider();
 
-	const signInUsingGoogle = (navigate, location, setOpen) => {
+	const signInUsingGoogle = (navigate, location) => {
 		setIsloading(true);
 		signInWithPopup(auth, googleProvider)
 			.then((result) => {
 				const user = result?.user;
+				Swal.fire("Success!", "SignIn Successful.", "success");
 				saveOrReplaceUserToDb(
 					user?.email,
 					user?.displayName,
-					setOpen,
 					navigate,
 					location,
 				);
@@ -41,33 +42,25 @@ const useFirebase = () => {
 			.catch((error) => {
 				const errorMessage = error.message;
 				setError(errorMessage);
+				Swal.fire("Error!", `${errorMessage}`, "error");
 			})
 			.finally(() => setIsloading(false));
 	};
-	const resetPassword = (
-		auth,
-		email,
-		setState,
-		setSuccess,
-		data,
-		navigate,
-		location,
-		setOpen,
-	) => {
+	const resetPassword = (auth, email, navigate, location) => {
 		sendPasswordResetEmail(auth, email)
 			.then(() => {
-				const successMsg = "Please Check Your Email Inbox";
-				setState(data);
-				setSuccess(successMsg);
-				setOpen(true);
-				setTimeout(function () {
-					const destination = location?.state?.from || "/login";
-					navigate(destination);
-				}, 4000);
+				Swal.fire(
+					"Success!",
+					"Password Reset Successful. Check Email inbox and follow the steps.",
+					"success",
+				);
+				const destination = location?.state?.from || "/login";
+				navigate(destination);
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
 				setError(errorMessage);
+				Swal.fire("Error!", `${errorMessage}`, "error");
 			})
 			.finally(() => setIsloading(false));
 	};
@@ -83,6 +76,7 @@ const useFirebase = () => {
 		setIsloading(true);
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((res) => {
+				Swal.fire("Success!", "New User Created Successfully.", "success");
 				setUser(res.user);
 				updateProfile(auth.currentUser, {
 					displayName: displayName,
@@ -92,6 +86,7 @@ const useFirebase = () => {
 			.catch((error) => {
 				const errorMessage = error.message;
 				setError(errorMessage);
+				Swal.fire("Error!", `${errorMessage}`, "error");
 			})
 			.finally(() => setIsloading(false));
 	};
@@ -102,20 +97,18 @@ const useFirebase = () => {
 		password,
 		navigate,
 		location,
-		setOpen,
 	) => {
 		setIsloading(true);
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
-				setOpen(true);
-				setTimeout(function () {
-					const destination = location?.state?.from || "/";
-					navigate(destination);
-				}, 4000);
+				Swal.fire("Success!", "SignIn Successful.", "success");
+				const destination = location?.state?.from || "/";
+				navigate(destination);
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
 				setError(errorMessage);
+				Swal.fire("Error!", `${errorMessage}`, "error");
 			})
 			.finally(() => setIsloading(false));
 	};
@@ -123,31 +116,22 @@ const useFirebase = () => {
 	const saveUserToDb = (email, displayName, navigate, location) => {
 		const user = { email, displayName };
 		axios
-			.post("http://localhost:5000/users", user)
+			.post(`https://${process.env.REACT_APP_SERVER_API}/users`, user)
 			.then(function (response) {
-				setTimeout(function () {
-					const destination = location?.state?.from || "/";
-					navigate(destination);
-				}, 4000);
+				const destination = location?.state?.from || "/";
+				navigate(destination);
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
 	};
-	const saveOrReplaceUserToDb = (
-		email,
-		displayName,
-		navigate,
-		location,
-	) => {
+	const saveOrReplaceUserToDb = (email, displayName, navigate, location) => {
 		const user = { email, displayName };
 		axios
-			.put("http://localhost:5000/users", user)
+			.put(`https://${process.env.REACT_APP_SERVER_API}/users`, user)
 			.then(function (response) {
-				setTimeout(function () {
-					const destination = location?.state?.from || "/";
-					navigate(destination);
-				}, 4000);
+				const destination = location?.state?.from || "/";
+				navigate(destination);
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -156,7 +140,7 @@ const useFirebase = () => {
 
 	/*------ to findout user is admin or not---------- */
 	useEffect(() => {
-		fetch(`http://localhost:5000/users/${user?.email}`)
+		fetch(`https://${process.env.REACT_APP_SERVER_API}/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((data) => setAdmin(data?.admin));
 	}, [user?.email]);

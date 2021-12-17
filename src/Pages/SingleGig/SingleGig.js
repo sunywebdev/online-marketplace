@@ -8,7 +8,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,26 +16,29 @@ import NavBar from "../Shared/NavBar/NavBar";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../context/useAuth";
+import Swal from "sweetalert2";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 SwiperCore.use([Pagination, Navigation]);
 
 const SingleGig = () => {
 	const { user } = useAuth();
 	const { id } = useParams();
-	console.log(id);
 	const [gig, setGig] = React.useState([]);
 	React.useEffect(() => {
-		fetch(`http://localhost:5000/gigs/${id}`)
+		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
 			.then((res) => res.json())
 			.then((data) => setGig(data));
 	}, [id]);
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
-		fetch(`http://localhost:5000/singleUsers?email=${user?.email}`)
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				setSingleUser(data);
-				console.log(data);
 			});
 	}, [user?.email]);
 	const orderNow = () => {
@@ -50,8 +52,10 @@ const SingleGig = () => {
 			orderId: `${Math.random().toString(36).substring(2, 7)}`,
 		};
 		axios
-			.post("http://localhost:5000/orders", orderInfo)
-			.then(function (response) {})
+			.post(`https://${process.env.REACT_APP_SERVER_API}/orders`, orderInfo)
+			.then(function (response) {
+				Swal.fire("Success!", "New Order Placed Successfully.", "success");
+			})
 			.catch(function (error) {
 				console.log(error);
 			});
@@ -72,7 +76,7 @@ const SingleGig = () => {
 							gutterBottom
 							variant='h4'
 							component='div'
-							sx={{ fontWeight: 600, textAlign: "left" }}>
+							sx={{ fontWeight: 600, textAlign: "left", color: "#31887D" }}>
 							{gig?.gigTitle}
 						</Typography>
 						<Grid
@@ -190,21 +194,21 @@ const SingleGig = () => {
 							gutterBottom
 							variant='h4'
 							component='div'
-							sx={{ fontWeight: 600, textAlign: "left" }}>
+							sx={{ fontWeight: 600, textAlign: "left", color: "#31887D" }}>
 							About This Gig
 						</Typography>
 						<Typography
 							gutterBottom
 							variant='body2'
 							component='div'
-							sx={{ fontWeight: 600, textAlign: "left" }}>
+							sx={{ textAlign: "left" }}>
 							{gig?.gigDescription}
 						</Typography>
 						<List>
 							<ListItem disablePadding>
 								<ListItemButton>
 									<ListItemIcon>
-										<DraftsIcon />
+										<CalendarTodayIcon />
 									</ListItemIcon>
 									<ListItemIcon>
 										<ListItemText
@@ -218,7 +222,7 @@ const SingleGig = () => {
 							<ListItem disablePadding>
 								<ListItemButton>
 									<ListItemIcon>
-										<DraftsIcon />
+										<AttachMoneyIcon />
 									</ListItemIcon>
 									<ListItemIcon>
 										<ListItemText

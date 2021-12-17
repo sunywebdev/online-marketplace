@@ -1,17 +1,29 @@
-import { Button, Container, Grid, Paper, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
+import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import slider1 from "../../../../Photos/slider1.png";
 import slider2 from "../../../../Photos/slider2.png";
 import slider3 from "../../../../Photos/slider3.png";
 import slider4 from "../../../../Photos/slider4.png";
 import { Box } from "@mui/system";
+import useAuth from "../../../../context/useAuth";
 SwiperCore.use([Autoplay, Pagination]);
 
 const Banner = () => {
+	const { user } = useAuth();
+	const [singleUser, setSingleUser] = React.useState();
+	React.useEffect(() => {
+		fetch(
+			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+		)
+			.then((res) => res.json())
+			.then((data) => {
+				setSingleUser(data);
+			});
+	}, [user?.email]);
 	return (
 		<Container sx={{ minWidth: "100%", py: 3 }}>
 			<Grid
@@ -37,22 +49,12 @@ const Banner = () => {
 							gutterBottom
 							component='div'
 							sx={{ color: "#31887D", fontWeight: "bold" }}>
-							Dear SUNY,
+							Dear {singleUser?.userName},
 						</Typography>
-						<Typography variant='h6' gutterBottom component='div'>
-							Get offers from sellers for your project
+						<Typography variant='subtitle1' gutterBottom component='div'>
+							The key to your success on Online Marketplace is the brand you
+							build for yourself through your Online Marketplace reputation.
 						</Typography>
-						<Button
-							variant='contained'
-							sx={{
-								mt: 2,
-								backgroundColor: "#31887D",
-								"&.MuiButtonBase-root:hover": {
-									bgcolor: "#31887D",
-								},
-							}}>
-							Post A Request
-						</Button>
 					</Box>
 				</Grid>
 				<Grid
