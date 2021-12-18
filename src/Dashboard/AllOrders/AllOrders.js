@@ -65,6 +65,7 @@ const AllOrders = () => {
 							<>
 								{orders?.map((order) => (
 									<TableRow
+										key={order?._id}
 										sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
 										<TableCell component='th' scope='row'>
 											{serial++}

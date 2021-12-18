@@ -224,8 +224,15 @@ const Profile = () => {
 				</Grid>
 				<Grid item xs={12} md={6}>
 					<Typography
-						sx={{ textAlign: "center", pb: 2, fontWeight: "bold" }}
-						variant='h5'>
+						variant='h4'
+						gutterBottom
+						component='div'
+						sx={{
+							textAlign: "center",
+							pb: 2,
+							fontWeight: "bold",
+							color: "#31887D",
+						}}>
 						Update Your Profile
 					</Typography>
 					<form onSubmit={handleSubmit(onSubmit)}>
@@ -332,7 +339,18 @@ const Profile = () => {
 										alt=''
 									/>
 								)}
-								<label htmlFor='icon-button-file'>
+								<ArrowForwardIcon
+									fontSize='large'
+									sx={{ fontWeight: "bold", color: "#31887D" }}
+								/>
+								<label
+									htmlFor='icon-button-file'
+									style={{
+										backgroundColor: "#31887D",
+										height: "95%",
+										display: "flex",
+										margin: "0 9px",
+									}}>
 									<Input
 										accept='image/*'
 										id='icon-button-file'
@@ -345,7 +363,7 @@ const Profile = () => {
 										component='span'>
 										<AttachFileIcon
 											fontSize='large'
-											sx={{ fontWeight: "bold", color: "#31887D" }}
+											sx={{ fontWeight: "bold", color: "white" }}
 										/>
 									</IconButton>
 								</label>
@@ -372,27 +390,30 @@ const Profile = () => {
 										</Box>
 									)}
 								</Box>
-								<ArrowForwardIcon
-									fontSize='large'
-									sx={{ fontWeight: "bold", color: "#31887D" }}
-								/>
+
 								{inputImage1 && (
-									<Button
-										onClick={uploadImage1}
-										variant='contained'
-										component='span'
-										sx={{
-											mx: 1,
-											height: "100px",
-											width: "100px",
-											border: "1px solid black",
-											backgroundColor: "#31887D",
-											"&.MuiButtonBase-root:hover": {
-												bgcolor: "#31887D",
-											},
-										}}>
-										Upload Image
-									</Button>
+									<>
+										<ArrowForwardIcon
+											fontSize='large'
+											sx={{ fontWeight: "bold", color: "#31887D" }}
+										/>
+										<Button
+											onClick={uploadImage1}
+											variant='contained'
+											component='span'
+											sx={{
+												mx: 1,
+												height: "100px",
+												width: "100px",
+												border: "1px solid black",
+												backgroundColor: "#31887D",
+												"&.MuiButtonBase-root:hover": {
+													bgcolor: "#31887D",
+												},
+											}}>
+											Upload Image
+										</Button>
+									</>
 								)}
 							</Grid>
 

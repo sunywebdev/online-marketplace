@@ -37,20 +37,30 @@ const Gigs = () => {
 			<Grid
 				container
 				spacing={4}
+				alignItems='stretch'
 				sx={{
 					display: "flex",
 					flexDirection: "row",
-					alignItems: "center",
 				}}>
 				{gigs?.length !== 0 ? (
 					<>
 						{gigs?.map((gig) => (
-							<Grid item lg={3} md={4} sm={4} xs={12}>
+							<Grid
+								key={gig?._id}
+								item
+								lg={3}
+								md={4}
+								sm={4}
+								xs={12}
+								style={{ display: "flex" }}>
 								<Card
-									sx={{
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+										flexDirection: "column",
+										width: "100%",
 										textAlign: "left",
 										border: "1px solid #e4e5e7",
-										height: "100%",
 									}}>
 									<img
 										style={{ width: "100%", minHeight: "155px" }}
@@ -82,7 +92,7 @@ const Gigs = () => {
 											to={`/gigs/${gig?._id}`}
 											style={{ textDecoration: "none", color: "black" }}>
 											<Typography gutterBottom variant='body' component='div'>
-												{gig?.gigTitle.slice(0,60)}
+												{gig?.gigTitle.slice(0, 60)}
 											</Typography>
 										</Link>
 										<Box
