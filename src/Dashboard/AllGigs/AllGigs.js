@@ -20,7 +20,7 @@ const AllGigs = () => {
 		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs`)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
-	}, []);
+	}, [gigs]);
 	const handleDelete = (id) => {
 		Swal.fire({
 			title: "Are you sure?",

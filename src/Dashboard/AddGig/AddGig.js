@@ -28,6 +28,10 @@ const AddGig = () => {
 	const [uploading2, setUploading2] = useState(false);
 	const [uploading3, setUploading3] = useState(false);
 	const [uploading4, setUploading4] = useState(false);
+	const [inputImage11, setInputImage11] = useState(false);
+	const [inputImage22, setInputImage22] = useState(false);
+	const [inputImage33, setInputImage33] = useState(false);
+	const [inputImage44, setInputImage44] = useState(false);
 	const uploadImage1 = (e) => {
 		e.preventDefault();
 		if (!inputImage1) {
@@ -45,6 +49,7 @@ const AddGig = () => {
 			.then((response) => {
 				setUploading1(false);
 				setImageLink1(response?.data?.data?.url);
+				setInputImage11(true);
 				Swal.fire({
 					icon: "success",
 					title: "Photo Uploaded",
@@ -80,6 +85,7 @@ const AddGig = () => {
 			.then((response) => {
 				setUploading2(false);
 				setImageLink2(response?.data?.data?.url);
+				setInputImage22(true);
 				Swal.fire({
 					icon: "success",
 					title: "Photo Uploaded",
@@ -115,6 +121,7 @@ const AddGig = () => {
 			.then((response) => {
 				setUploading3(false);
 				setImageLink3(response?.data?.data?.url);
+				setInputImage33(true);
 				Swal.fire({
 					icon: "success",
 					title: "Photo Uploaded",
@@ -150,6 +157,7 @@ const AddGig = () => {
 			.then((response) => {
 				setUploading4(false);
 				setImageLink4(response?.data?.data?.url);
+				setInputImage44(true);
 				Swal.fire({
 					icon: "success",
 					title: "Photo Uploaded",
@@ -282,22 +290,24 @@ const AddGig = () => {
 														alt=''
 														width='250px'
 													/>
-													<Button
-														onClick={uploadImage1}
-														variant='contained'
-														component='span'
-														className='button border'
-														sx={{
-															my: 1,
-															py: 0.5,
-															width: "250px",
-															backgroundColor: "#31887D",
-															"&.MuiButtonBase-root:hover": {
-																bgcolor: "#31887D",
-															},
-														}}>
-														Upload Image
-													</Button>
+													{!inputImage11 && (
+														<Button
+															onClick={uploadImage1}
+															variant='contained'
+															component='span'
+															className='button border'
+															sx={{
+																my: 1,
+																py: 0.5,
+																width: "250px",
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															Upload Image
+														</Button>
+													)}
 												</>
 											)}
 										</>
@@ -326,22 +336,24 @@ const AddGig = () => {
 														alt=''
 														width='250px'
 													/>
-													<Button
-														onClick={uploadImage2}
-														variant='contained'
-														component='span'
-														className='button border'
-														sx={{
-															my: 1,
-															py: 0.5,
-															width: "250px",
-															backgroundColor: "#31887D",
-															"&.MuiButtonBase-root:hover": {
-																bgcolor: "#31887D",
-															},
-														}}>
-														Upload Image
-													</Button>
+													{!inputImage22 && (
+														<Button
+															onClick={uploadImage2}
+															variant='contained'
+															component='span'
+															className='button border'
+															sx={{
+																my: 1,
+																py: 0.5,
+																width: "250px",
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															Upload Image
+														</Button>
+													)}
 												</>
 											)}
 										</>
@@ -370,22 +382,24 @@ const AddGig = () => {
 														alt=''
 														width='250px'
 													/>
-													<Button
-														onClick={uploadImage3}
-														variant='contained'
-														component='span'
-														className='button border'
-														sx={{
-															my: 1,
-															py: 0.5,
-															width: "250px",
-															backgroundColor: "#31887D",
-															"&.MuiButtonBase-root:hover": {
-																bgcolor: "#31887D",
-															},
-														}}>
-														Upload Image
-													</Button>
+													{!inputImage33 && (
+														<Button
+															onClick={uploadImage3}
+															variant='contained'
+															component='span'
+															className='button border'
+															sx={{
+																my: 1,
+																py: 0.5,
+																width: "250px",
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															Upload Image
+														</Button>
+													)}
 												</>
 											)}
 										</>
@@ -414,22 +428,24 @@ const AddGig = () => {
 														alt=''
 														width='250px'
 													/>
-													<Button
-														onClick={uploadImage4}
-														variant='contained'
-														component='span'
-														className='button border'
-														sx={{
-															my: 1,
-															py: 0.5,
-															width: "250px",
-															backgroundColor: "#31887D",
-															"&.MuiButtonBase-root:hover": {
-																bgcolor: "#31887D",
-															},
-														}}>
-														Upload Image
-													</Button>
+													{!inputImage44 && (
+														<Button
+															onClick={uploadImage4}
+															variant='contained'
+															component='span'
+															className='button border'
+															sx={{
+																my: 1,
+																py: 0.5,
+																width: "250px",
+																backgroundColor: "#31887D",
+																"&.MuiButtonBase-root:hover": {
+																	bgcolor: "#31887D",
+																},
+															}}>
+															Upload Image
+														</Button>
+													)}
 												</>
 											)}
 										</>

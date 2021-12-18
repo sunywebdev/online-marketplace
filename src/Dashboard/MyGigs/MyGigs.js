@@ -35,7 +35,7 @@ const MyGigs = () => {
 		)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
-	}, [singleUser?.userName]);
+	}, [singleUser?.userName, gigs]);
 	const handleDelete = (id) => {
 		Swal.fire({
 			title: "Are you sure?",
