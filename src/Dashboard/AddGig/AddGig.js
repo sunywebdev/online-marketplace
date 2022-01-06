@@ -180,7 +180,7 @@ const AddGig = () => {
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -202,7 +202,7 @@ const AddGig = () => {
 			gigPhoto4: imageLink4,
 		};
 		axios
-			.post(`https://${process.env.REACT_APP_SERVER_API}/gigs`, gig)
+			.post(`https://intense-brushlands-25667.herokuapp.com/gigs`, gig)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",

@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 const Gigs = () => {
 	const [gigs, setGigs] = useState([]);
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/gigs`)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
 	}, []);

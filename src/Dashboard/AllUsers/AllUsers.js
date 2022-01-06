@@ -11,7 +11,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 const AllUsers = () => {
 	const [users, setUsers] = useState([]);
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/users`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/users`)
 			.then((res) => res.json())
 			.then((data) => setUsers(data));
 	}, []);

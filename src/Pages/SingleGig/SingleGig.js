@@ -27,14 +27,14 @@ const SingleGig = () => {
 	const { id } = useParams();
 	const [gig, setGig] = React.useState([]);
 	React.useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/gigs/${id}`)
 			.then((res) => res.json())
 			.then((data) => setGig(data));
 	}, [id]);
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -52,7 +52,7 @@ const SingleGig = () => {
 			orderId: `${Math.random().toString(36).substring(2, 7)}`,
 		};
 		axios
-			.post(`https://${process.env.REACT_APP_SERVER_API}/orders`, orderInfo)
+			.post(`https://intense-brushlands-25667.herokuapp.com/orders`, orderInfo)
 			.then(function (response) {
 				Swal.fire("Success!", "New Order Placed Successfully.", "success");
 			})

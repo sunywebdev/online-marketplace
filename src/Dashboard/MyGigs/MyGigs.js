@@ -20,7 +20,7 @@ const MyGigs = () => {
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -31,7 +31,7 @@ const MyGigs = () => {
 	const [gigs, setGigs] = useState([]);
 	useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/sellergigs?postedBy=${singleUser?.userName}`,
+			`https://intense-brushlands-25667.herokuapp.com/sellergigs?postedBy=${singleUser?.userName}`,
 		)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
@@ -48,7 +48,7 @@ const MyGigs = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
+					.delete(`https://intense-brushlands-25667.herokuapp.com/gigs/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "That Gig has been deleted.", "success");
 					})

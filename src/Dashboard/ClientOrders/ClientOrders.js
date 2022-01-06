@@ -16,7 +16,7 @@ const ClientOrders = () => {
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -27,7 +27,7 @@ const ClientOrders = () => {
 	const [orders, setOrders] = useState([]);
 	useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/postedBy?postedBy=${singleUser?.userName}`,
+			`https://intense-brushlands-25667.herokuapp.com/postedBy?postedBy=${singleUser?.userName}`,
 		)
 			.then((res) => res.json())
 			.then((data) => setOrders(data));
@@ -36,7 +36,7 @@ const ClientOrders = () => {
 	const Accept = (e) => {
 		const data = { orderStatus: "OnGoing", orderId: e };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.put(`https://intense-brushlands-25667.herokuapp.com/orders`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "This Order Accepted Successfully.", "success");
 			})
@@ -47,7 +47,7 @@ const ClientOrders = () => {
 	const Cancel = (e) => {
 		const data = { orderStatus: "Cancelled by Seller", orderId: e };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.put(`https://intense-brushlands-25667.herokuapp.com/orders`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "This Order Cancelled Successfully.", "success");
 			})
@@ -58,7 +58,7 @@ const ClientOrders = () => {
 	const Delivered = (e) => {
 		const data = { orderStatus: "Delivered", orderId: e };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.put(`https://intense-brushlands-25667.herokuapp.com/orders`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "This Order Delivered Successfully.", "success");
 			})

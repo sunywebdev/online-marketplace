@@ -16,7 +16,7 @@ const MyOrders = () => {
 	const [singleUser, setSingleUser] = React.useState();
 	React.useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -26,7 +26,7 @@ const MyOrders = () => {
 	const [orders, setOrders] = useState([]);
 	useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/myorders?userName=${singleUser?.userName}`,
+			`https://intense-brushlands-25667.herokuapp.com/myorders?userName=${singleUser?.userName}`,
 		)
 			.then((res) => res.json())
 			.then((data) => setOrders(data));
@@ -35,7 +35,7 @@ const MyOrders = () => {
 	const Cancel = (e) => {
 		const data = { orderStatus: "Cancelled by Buyer", orderId: e };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.put(`https://intense-brushlands-25667.herokuapp.com/orders`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "This Order Cancelled Successfully.", "success");
 			})

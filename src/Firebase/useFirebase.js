@@ -116,7 +116,7 @@ const useFirebase = () => {
 	const saveUserToDb = (email, displayName, navigate, location) => {
 		const user = { email, displayName };
 		axios
-			.post(`https://${process.env.REACT_APP_SERVER_API}/users`, user)
+			.post(`https://intense-brushlands-25667.herokuapp.com/users`, user)
 			.then(function (response) {
 				const destination = location?.state?.from || "/";
 				navigate(destination);
@@ -128,7 +128,7 @@ const useFirebase = () => {
 	const saveOrReplaceUserToDb = (email, displayName, navigate, location) => {
 		const user = { email, displayName };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/users`, user)
+			.put(`https://intense-brushlands-25667.herokuapp.com/users`, user)
 			.then(function (response) {
 				const destination = location?.state?.from || "/";
 				navigate(destination);
@@ -140,7 +140,7 @@ const useFirebase = () => {
 
 	/*------ to findout user is admin or not---------- */
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/users/${user?.email}`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((data) => setAdmin(data?.admin));
 	}, [user?.email]);

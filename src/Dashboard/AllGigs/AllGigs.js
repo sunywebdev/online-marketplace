@@ -17,7 +17,7 @@ import { Box } from "@mui/system";
 const AllGigs = () => {
 	const [gigs, setGigs] = useState([]);
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/gigs`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/gigs`)
 			.then((res) => res.json())
 			.then((data) => setGigs(data));
 	}, [gigs]);
@@ -33,7 +33,7 @@ const AllGigs = () => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				axios
-					.delete(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
+					.delete(`https://intense-brushlands-25667.herokuapp.com/gigs/${id}`)
 					.then(function (response) {
 						Swal.fire("Deleted!", "That Gig has been deleted.", "success");
 					})

@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 const AllOrders = () => {
 	const [orders, setOrders] = useState([]);
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/orders`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/orders`)
 			.then((res) => res.json())
 			.then((data) => setOrders(data));
 	}, [orders]);
@@ -21,7 +21,7 @@ const AllOrders = () => {
 	const Cancel = (e) => {
 		const data = { orderStatus: "Cancelled by Admin", orderId: e };
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/orders`, data)
+			.put(`https://intense-brushlands-25667.herokuapp.com/orders`, data)
 			.then(function (response) {
 				Swal.fire("Success!", "This Order Cancelled Successfully.", "success");
 			})

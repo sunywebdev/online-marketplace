@@ -21,7 +21,7 @@ const PageRols = () => {
 	const { token } = useAuth();
 	const [allUsers, setAllUsers] = useState([]);
 	useEffect(() => {
-		fetch(`https://${process.env.REACT_APP_SERVER_API}/users`)
+		fetch(`https://intense-brushlands-25667.herokuapp.com/users`)
 			.then((res) => res.json())
 			.then((data) => setAllUsers(data));
 	}, []);
@@ -29,11 +29,15 @@ const PageRols = () => {
 	const { register, handleSubmit } = useForm();
 	const onSubmit = (data) => {
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/users/pageRole`, data, {
-				headers: {
-					Authorization: `Bearer ${token}`,
+			.put(
+				`https://intense-brushlands-25667.herokuapp.com/users/pageRole`,
+				data,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
 				},
-			})
+			)
 			.then(function (response) {
 				Swal.fire("Success!", "User Role Changed Successfully.", "success");
 			})

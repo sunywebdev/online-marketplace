@@ -53,7 +53,7 @@ const Profile = () => {
 		};
 		axios
 			.put(
-				`https://${process.env.REACT_APP_SERVER_API}/users/updateUsers`,
+				`https://intense-brushlands-25667.herokuapp.com/users/updateUsers`,
 				userProfile,
 			)
 			.then(function (response) {
@@ -66,7 +66,7 @@ const Profile = () => {
 	const [singleUser, setSingleUser] = useState();
 	useEffect(() => {
 		fetch(
-			`https://${process.env.REACT_APP_SERVER_API}/singleUsers?email=${user?.email}`,
+			`https://intense-brushlands-25667.herokuapp.com/singleUsers?email=${user?.email}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {

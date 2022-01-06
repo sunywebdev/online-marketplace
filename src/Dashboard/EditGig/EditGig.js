@@ -202,7 +202,7 @@ const EditGig = () => {
 	const [data, setData] = useState();
 	useEffect(() => {
 		axios
-			.get(`https://${process.env.REACT_APP_SERVER_API}/gigs/${id}`)
+			.get(`https://intense-brushlands-25667.herokuapp.com/gigs/${id}`)
 			.then((res) => {
 				reset(res.data);
 				setData(res.data);
@@ -231,7 +231,10 @@ const EditGig = () => {
 			gigPhoto4: imageLink4 || gigPhoto4,
 		};
 		axios
-			.put(`https://${process.env.REACT_APP_SERVER_API}/gigs/${data?._id}`, gig)
+			.put(
+				`https://intense-brushlands-25667.herokuapp.com/gigs/${data?._id}`,
+				gig,
+			)
 			.then(function (response) {
 				Swal.fire({
 					icon: "success",
